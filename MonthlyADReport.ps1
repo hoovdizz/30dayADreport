@@ -14,7 +14,7 @@ $Domainservers  = "dominserver1","domainerver2"
 
 $recip = "me@you.org"
 $sender = "Powershell@you.org"
-$subject = "Last 30 days AD Audit Report"
+$subject = "Last 30 Days AD Audit Report"
 
 #name of the machine for the schedule task
 $task= "server with monthly task to run"
@@ -23,7 +23,7 @@ $task= "server with monthly task to run"
 $today = get-date
 $ScriptPath = Split-Path -parent $MyInvocation.MyCommand.Definition
 $rundate = ([datetime]$today).tostring("MM_dd_yyyy")
-$30daysago = $($today.adddays(-32)).toshortdatestring() 
+$30daysago = $($today.adddays(-35)).toshortdatestring() 
 $year = ([datetime]$today).tostring("yyyy")
 $month = ([datetime]$today).tostring("MM")
 $startdateX = ([datetime]$30daysago).tostring("yyyy_MM_dd")
@@ -62,9 +62,9 @@ Foreach ($Server in $Domainservers)
 {
 
 #get accounts that have been created in the last 30 days
-$tempusers = Get-ADUser -server $Server -Filter * -Properties * | Where-Object {$_.whenCreated -ge ((Get-Date).AddDays(-30)).Date} | sort-object WhenCreated |Select-Object Name, SamAccountName, EmailAddress, WhenCreated 
+$tempusers = Get-ADUser -server $Server -Filter * -Properties * | Where-Object {$_.whenCreated -ge ((Get-Date).AddDays(-35)).Date} | sort-object WhenCreated |Select-Object Name, SamAccountName, EmailAddress, WhenCreated 
 #get Computers that have been created in the last 30 days
-$tempcomputers = Get-ADcomputer -server $Server -Filter * -Properties whenCreated | Where-Object {$_.whenCreated -ge ((Get-Date).AddDays(-30)).Date} | sort-object WhenCreated |Select-Object DNSHostName, WhenCreated
+$tempcomputers = Get-ADcomputer -server $Server -Filter * -Properties whenCreated | Where-Object {$_.whenCreated -ge ((Get-Date).AddDays(-35)).Date} | sort-object WhenCreated |Select-Object DNSHostName, WhenCreated
 #get everything that has been deleted in last 30 days
 $tempdelete = get-adobject -server $Server -filter {(isdeleted -eq $true) -and (objectclass -ne "container") -and (objectclass -ne "dnsnode")} -IncludeDeletedObjects -Properties * | sort-object ObjectClass, WhenChanged | Select-Object CN, WhenCreated, WhenChanged, ObjectClass
 
