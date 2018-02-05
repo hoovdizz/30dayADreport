@@ -14,7 +14,7 @@ $Domainservers  = "dominserver1","domainerver2"
 
 $recip = "me@you.org"
 $sender = "Powershell@you.org"
-$subject = "Last 30 days Audit"
+$subject = "Last 30 days AD Audit Report"
 
 #name of the machine for the schedule task
 $task= "server with monthly task to run"
@@ -74,7 +74,7 @@ Add-Content $htmlfilename "<table width='80%' align='center' border='1'>"
 Add-Content $htmlfilename "<tr bgcolor='#32CD32'>"
 Add-Content $htmlfilename "<td width='20%'>Name of New User on $server</td>"
 Add-Content $htmlfilename "<td width='15%'>Account Name</td>"
-Add-Content $htmlfilename "<td width='15%'>EmailAddress</td>"
+Add-Content $htmlfilename "<td width='15%'>Email Address</td>"
 Add-Content $htmlfilename "<td width='15%'>When Created on $server</td>"
 Add-Content $htmlfilename "</tr>"
 
@@ -116,10 +116,10 @@ Add-Content $htmlfilename "</p>"
 Add-Content $htmlfilename "<p>"
 Add-Content $htmlfilename "<table width='80%' align='center' border='1' >"
 Add-Content $htmlfilename "<tr bgcolor='#32CD32'>"
-Add-Content $htmlfilename "<td width='55%'>Deleted Object on server $Server</td>"
+Add-Content $htmlfilename "<td width='55%'>Deleted Object on Server $Server</td>"
 Add-Content $htmlfilename "<td width='15%'>When Created </td>"
 Add-Content $htmlfilename "<td width='15%'>When Changed </td>"
-Add-Content $htmlfilename "<td width='15%'>ObjectClass </td>"
+Add-Content $htmlfilename "<td width='15%'>Object Class </td>"
 
 Add-Content $htmlfilename "</tr>"
 
